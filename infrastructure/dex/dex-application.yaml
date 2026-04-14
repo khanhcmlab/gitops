@@ -16,10 +16,10 @@ spec:
       helm:
         valueFiles:
           - $values/infrastructure/dex/values.yaml
-    - repoURL: https://github.com/khanhcmlab/gitops.git
+    - repoURL: git@github.com:khanhcmlab/gitops.git
       targetRevision: HEAD
       ref: values
-    - repoURL: https://github.com/khanhcmlab/gitops.git
+    - repoURL: git@github.com:khanhcmlab/gitops.git
       targetRevision: HEAD
       path: infrastructure/dex
       directory:
