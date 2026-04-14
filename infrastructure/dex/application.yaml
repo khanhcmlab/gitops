@@ -3,29 +3,34 @@ kind: Application
 metadata:
   name: dex
   namespace: argocd
+  labels:
+    app.kubernetes.io/name: dex
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: dex
   sources:
     - repoURL: https://charts.dexidp.io
       chart: dex
-      targetRevision: 0.24.0
+      targetRevision: 0.19.1
       helm:
         valueFiles:
           - $values/infrastructure/dex/values.yaml
     - repoURL: https://github.com/khanhcmlab/gitops.git
-      targetRevision: main
+      targetRevision: HEAD
       ref: values
     - repoURL: https://github.com/khanhcmlab/gitops.git
-      targetRevision: main
+      targetRevision: HEAD
       path: infrastructure/dex
       directory:
-        include: '*secret.yaml'
+        include: "sealed-*.yaml"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
