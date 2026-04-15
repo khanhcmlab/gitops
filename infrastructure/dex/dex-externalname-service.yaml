@@ -9,3 +9,12 @@ metadata:
 spec:
   type: ExternalName
   externalName: dex.authentication.svc.cluster.local
+  ports:
+    - name: http
+      port: 5556
+      targetPort: 5556
+      protocol: TCP
+    - name: grpc
+      port: 5558
+      targetPort: 5558
+      protocol: TCP
