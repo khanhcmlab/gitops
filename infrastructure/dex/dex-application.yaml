@@ -23,7 +23,7 @@ spec:
       targetRevision: HEAD
       path: infrastructure/dex
       plugin:
-        name: sops
+        name: sops-plugin
   destination:
     server: https://kubernetes.default.svc
     namespace: authentication
