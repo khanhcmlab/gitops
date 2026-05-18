@@ -15,7 +15,7 @@ config:
         redirectURI: https://dexpacity.khanhcm.xyz/callback
 
   staticClients:
-    - id: argo-cd
+    - id: argocd
       name: ArgoCD
       secret: $ARGOCD_CLIENT_SECRET
       redirectURIs:
