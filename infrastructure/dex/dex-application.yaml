@@ -23,7 +23,7 @@ spec:
       targetRevision: HEAD
       path: infrastructure/dex
       directory:
-        include: "{sealed-*.yaml,*-service.yaml}"
+        include: "{sealed-*.yaml,*-service.yaml,*.enc.yaml}"
   destination:
     server: https://kubernetes.default.svc
     namespace: authentication

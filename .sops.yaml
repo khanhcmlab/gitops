@@ -1,0 +1,4 @@
+creation_rules:
+  # Apply this KMS key to any file ending in .enc.yaml
+  - path_regex: .*\.enc\.yaml$
+    kms: 'arn:aws:kms:us-east-1:177696520379:alias/sops-key'
