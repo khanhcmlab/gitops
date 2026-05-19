@@ -13,7 +13,8 @@ config:
         clientID: $GITHUB_CLIENT_ID
         clientSecret: $GITHUB_CLIENT_SECRET
         redirectURI: https://dexpacity.khanhcm.xyz/callback
-
+        orgs:
+          - name: khanhcmlab
   staticClients:
     - id: argocd
       name: ArgoCD
