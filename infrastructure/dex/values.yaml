@@ -15,12 +15,12 @@ config:
         redirectURI: https://dexpacity.khanhcm.xyz/callback
         orgs:
           - name: khanhcmlab
-  # staticClients:
-  #   - id: argocd
-  #     name: ArgoCD
-  #     secret: $ARGOCD_CLIENT_SECRET
-  #     redirectURIs:
-  #       - https://argocd-chelsea.khanhcm.xyz/auth/callback
+  staticClients:
+    - id: argocd
+      name: ArgoCD
+      secret: $ARGOCD_CLIENT_SECRET
+      redirectURIs:
+        - https://argocd-chelsea.khanhcm.xyz/auth/callback
 
 envFrom:
   - secretRef:
