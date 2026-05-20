@@ -27,3 +27,14 @@ envFrom:
       name: dex-github-oauth
   - secretRef:
       name: dex-argocd-client
+
+nodeSelector:
+  node: gl
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
