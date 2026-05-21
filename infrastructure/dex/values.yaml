@@ -1,5 +1,5 @@
 config:
-  issuer: https://dexpacity.khanhcm.xyz
+  issuer: https://dexpacity.khanhcm.site
   storage:
     type: kubernetes
     config:
@@ -12,7 +12,7 @@ config:
       config:
         clientID: $GITHUB_CLIENT_ID
         clientSecret: $GITHUB_CLIENT_SECRET
-        redirectURI: https://dexpacity.khanhcm.xyz/callback
+        redirectURI: https://dexpacity.khanhcm.site/callback
         orgs:
           - name: khanhcmlab
   staticClients:
@@ -20,7 +20,7 @@ config:
       name: ArgoCD
       secretEnv: ARGOCD_CLIENT_SECRET
       redirectURIs:
-        - https://argocd-chelsea.khanhcm.xyz/auth/callback
+        - https://argocd-chelsea.khanhcm.site/auth/callback
 
 envFrom:
   - secretRef:

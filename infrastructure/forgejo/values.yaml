@@ -8,8 +8,8 @@ gitea:
   config:
     APP_NAME: "Forgejo"
     server:
-      DOMAIN: gitumame.khanhcm.xyz
-      ROOT_URL: https://gitumame.khanhcm.xyz/
+      DOMAIN: gitumame.khanhcm.site
+      ROOT_URL: https://gitumame.khanhcm.site/
       HTTP_PORT: 3000
     database:
       DB_TYPE: postgres
