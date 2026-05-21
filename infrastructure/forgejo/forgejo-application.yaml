@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: forgejo
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: forgejo
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://forgejo-contrib.codeberg.page/forgejo-helm/
+      chart: forgejo
+      targetRevision: 17.1.0
+      helm:
+        valueFiles:
+          - $values/infrastructure/forgejo/values.yaml
+    - repoURL: git@github.com:khanhcmlab/gitops.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: git@github.com:khanhcmlab/gitops.git
+      targetRevision: HEAD
+      path: infrastructure/forgejo
+      plugin:
+        name: sops-v1.0
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: forgejo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
