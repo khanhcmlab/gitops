@@ -1,21 +1,9 @@
-app-template:
-  openclawVersion: "2026.5.22"
-  chromiumVersion: "148.0.7778.97"
-  configMode: merge
-  skills:
-    - weather
-    - gog
+image:
+  tag: "2026.5.22"
 
-  controllers:
-    main:
-      containers:
-        main:
-          envFrom:
-            - secretRef:
-                name: openclaw-env-secret
+persistence:
+  enabled: true
+  size: 5Gi
 
-  persistence:
-    data:
-      enabled: true
-      accessMode: ReadWriteOnce
-      size: 5Gi
+credentials:
+  existingSecret: openclaw-env-secret
