@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - secret.enc.yaml
   - pv.yaml
+  - openclaw-externalname-service.yaml
