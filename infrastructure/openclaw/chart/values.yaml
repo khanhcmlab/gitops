@@ -21,6 +21,7 @@ persistence:
   enabled: true
   size: 5Gi
   accessMode: ReadWriteOnce
+  storageClassName: ""
 
 credentials:
   existingSecret: openclaw-env-secret
