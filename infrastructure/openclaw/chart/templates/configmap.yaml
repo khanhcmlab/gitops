@@ -10,6 +10,11 @@ data:
         "port": {{ .Values.openclaw.port }},
         "mode": "local",
         "trustedProxies": []
+        {{- if .Values.openclaw.allowedOrigins }},
+        "controlUi": {
+          "allowedOrigins": {{ .Values.openclaw.allowedOrigins | toJson }}
+        }
+        {{- end }}
       },
       "browser": {
         "enabled": {{ .Values.chromium.enabled }},
