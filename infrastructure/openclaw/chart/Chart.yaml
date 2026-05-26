@@ -1,0 +1,6 @@
+apiVersion: v2
+name: openclaw
+description: Custom Helm chart for deploying OpenClaw AI assistant on Kubernetes
+type: application
+version: 1.0.0
+appVersion: "2026.5.22"

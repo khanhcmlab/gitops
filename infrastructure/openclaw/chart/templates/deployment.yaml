@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "openclaw.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ include "openclaw.name" . }}
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "openclaw.name" . }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "openclaw.name" . }}
+    spec:
+      securityContext:
+        fsGroup: 1000
+      
+      initContainers:
+        - name: init-config
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          command:
+            - sh
+            - -c
+            - |
+              mkdir -p /home/node/.openclaw
+              if [ ! -f /home/node/.openclaw/openclaw.json ]; then
+                cp /config/openclaw.json /home/node/.openclaw/openclaw.json
+              fi
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config
+            - name: data-volume
+              mountPath: /home/node/.openclaw
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            readOnlyRootFilesystem: false
+
+      containers:
+        - name: openclaw
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - node
+            - dist/index.js
+          args:
+            - gateway
+            - --bind
+            - {{ .Values.openclaw.bind }}
+            - --port
+            - "{{ .Values.openclaw.port }}"
+          {{- if .Values.credentials.existingSecret }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.credentials.existingSecret }}
+          {{- end }}
+          env:
+            - name: TZ
+              value: {{ .Values.openclaw.timezone }}
+          ports:
+            - name: gateway
+              containerPort: {{ .Values.openclaw.port }}
+          volumeMounts:
+            - name: data-volume
+              mountPath: /home/node/.openclaw
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              cpu: 2000m
+              memory: 2Gi
+
+        {{- if .Values.chromium.enabled }}
+        - name: chromium
+          image: "{{ .Values.chromium.image.repository }}:{{ .Values.chromium.image.tag }}"
+          imagePullPolicy: {{ .Values.chromium.image.pullPolicy }}
+          env:
+            - name: XDG_CACHE_HOME
+              value: /tmp
+          ports:
+            - name: cdp
+              containerPort: 9222
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+          resources:
+            {{- toYaml .Values.chromium.resources | nindent 12 }}
+        {{- end }}
+
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ include "openclaw.fullname" . }}-config
+        - name: data-volume
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "openclaw.fullname" . }}-data
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
