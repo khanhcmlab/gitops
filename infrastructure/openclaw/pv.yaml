@@ -13,7 +13,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /var/mnt/zfs-openclaw
+    path: /var/mnt/zfs-data
   nodeAffinity:
     required:
       nodeSelectorTerms:
