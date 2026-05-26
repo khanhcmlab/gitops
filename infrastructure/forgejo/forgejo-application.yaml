@@ -10,7 +10,7 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://forgejo-contrib.codeberg.page/forgejo-helm/
+    - repoURL: oci://code.forgejo.org/forgejo-helm
       chart: forgejo
       targetRevision: 17.1.0
       helm:
