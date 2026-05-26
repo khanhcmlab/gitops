@@ -8,3 +8,8 @@ persistence:
 
 credentials:
   existingSecret: openclaw-env-secret
+
+openclaw:
+  allowedOrigins:
+    - "https://openclaw.org"
+    - "http://localhost:5173"
