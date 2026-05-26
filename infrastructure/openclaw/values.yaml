@@ -13,3 +13,5 @@ openclaw:
   allowedOrigins:
     - "https://openclaw.org"
     - "http://localhost:5173"
+    - "https://clawless.khanhcm.site"
+    - "wss://clawless.khanhcm.site"
