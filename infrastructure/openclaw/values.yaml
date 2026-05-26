@@ -4,6 +4,7 @@ image:
 persistence:
   enabled: true
   size: 5Gi
+  storageClassName: local-storage
 
 credentials:
   existingSecret: openclaw-env-secret
