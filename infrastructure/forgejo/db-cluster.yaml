@@ -6,7 +6,7 @@ metadata:
 spec:
   instances: 1
   storage:
-    size: 20Gi
+    size: 10Gi
   bootstrap:
     initdb:
       database: forgejo

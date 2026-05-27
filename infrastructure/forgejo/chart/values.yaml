@@ -1,11 +1,19 @@
 image:
+  repository: codeberg.org/forgejo/forgejo
   tag: "9.0"
+  pullPolicy: IfNotPresent
 
-# Node Selector matching dex and other infrastructure settings
-nodeSelector:
-  node: hp
+service:
+  type: ClusterIP
+  httpPort: 3000
+  sshPort: 22
 
-# Resource allocation for stable execution
+persistence:
+  enabled: true
+  size: 20Gi
+  storageClassName: ""
+  accessMode: ReadWriteOnce
+
 resources:
   limits:
     cpu: 500m
@@ -14,11 +22,7 @@ resources:
     cpu: 200m
     memory: 256Mi
 
-# Persistent storage configuration for repositories and metadata
-persistence:
-  enabled: true
-  size: 20Gi
-  storageClassName: local-storage
+nodeSelector: {}
 
 db:
   type: postgres

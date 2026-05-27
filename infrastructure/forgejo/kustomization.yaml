@@ -4,3 +4,5 @@ kind: Kustomization
 resources:
   - db-cluster.yaml
   - secret.enc.yaml
+  - forgejo-externalname-service.yaml
+  - pv.yaml

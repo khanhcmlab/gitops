@@ -10,9 +10,9 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: oci://code.forgejo.org/forgejo-helm
-      chart: forgejo
-      targetRevision: 17.1.0
+    - repoURL: git@github.com:khanhcmlab/gitops.git
+      targetRevision: HEAD
+      path: infrastructure/forgejo/chart
       helm:
         valueFiles:
           - $values/infrastructure/forgejo/values.yaml
