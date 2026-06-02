@@ -12,3 +12,8 @@ spec:
     initdb:
       database: forgejo
       owner: forgejo
+  podSecurityContext:
+    runAsUser: 26
+    runAsGroup: 26
+    fsGroup: 26
+    fsGroupChangePolicy: "OnRootMismatch"
