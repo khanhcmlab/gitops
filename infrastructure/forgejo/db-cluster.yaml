@@ -5,6 +5,7 @@ metadata:
   namespace: forgejo
 spec:
   instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgresql:16
   storage:
     size: 10Gi
     storageClass: local-storage
@@ -12,8 +13,7 @@ spec:
     initdb:
       database: forgejo
       owner: forgejo
-  podSecurityContext:
-    runAsUser: 26
-    runAsGroup: 26
-    fsGroup: 26
-    fsGroupChangePolicy: "OnRootMismatch"
+  podTemplate:
+    spec:
+      securityContext:
+        fsGroup: 26
