@@ -13,7 +13,5 @@ spec:
     initdb:
       database: forgejo
       owner: forgejo
-  podTemplate:
-    spec:
-      securityContext:
-        fsGroup: 26
+  podSecurityContext:
+    fsGroup: 26
