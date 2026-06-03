@@ -39,3 +39,4 @@ forgejo:
   appName: "Forgejo"
   domain: gitumame.khanhcm.site
   rootUrl: https://gitumame.khanhcm.site/
+  disableRegistration: false
