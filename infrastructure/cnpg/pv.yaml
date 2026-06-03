@@ -13,7 +13,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /var/mnt/zfs-data
+    path: /var/mnt/zfs-data/postgres
   nodeAffinity:
     required:
       nodeSelectorTerms:
