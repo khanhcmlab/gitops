@@ -1,6 +1,6 @@
 # Target standard node matching dex and other infrastructure settings
 nodeSelector:
-  node: gl
+  node: hp
 
 # Resource allocation for stable execution
 resources:
