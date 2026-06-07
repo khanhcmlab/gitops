@@ -22,6 +22,8 @@ spec:
     - repoURL: git@github.com:khanhcmlab/gitops.git
       targetRevision: HEAD
       path: infrastructure/grafana
+      plugin:
+        name: sops-v1.0
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring

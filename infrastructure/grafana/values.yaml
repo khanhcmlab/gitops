@@ -26,3 +26,9 @@ service:
   type: ClusterIP
   port: 80
   targetPort: 3000
+
+# Admin credentials configuration using external secret
+admin:
+  existingSecret: grafana-admin-secret
+  userKey: admin-user
+  passwordKey: admin-password
