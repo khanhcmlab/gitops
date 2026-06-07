@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - pv.yaml
   - grafana-externalname-service.yaml
+  - directory-creator-job.yaml
