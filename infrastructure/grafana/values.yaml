@@ -1,0 +1,28 @@
+# Target standard node matching dex and other infrastructure settings
+nodeSelector:
+  node: gl
+
+# Resource allocation for stable execution
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+
+# Persistent storage configuration using the local-storage storage class
+persistence:
+  enabled: true
+  type: pvc
+  storageClassName: local-storage
+  accessModes:
+    - ReadWriteOnce
+  size: 10Gi
+
+# Service configuration to expose Grafana inside the cluster
+service:
+  enabled: true
+  type: ClusterIP
+  port: 80
+  targetPort: 3000
