@@ -1,36 +1,36 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: grafana
-  namespace: argocd
-  labels:
-    app.kubernetes.io/name: grafana
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  project: default
-  sources:
-    - repoURL: https://grafana-community.github.io/helm-charts
-      chart: grafana
-      targetRevision: 12.4.2
-      helm:
-        valueFiles:
-          - $values/infrastructure/grafana/values.yaml
-    - repoURL: git@github.com:khanhcmlab/gitops.git
-      targetRevision: HEAD
-      ref: values
-    - repoURL: git@github.com:khanhcmlab/gitops.git
-      targetRevision: HEAD
-      path: infrastructure/grafana
-      plugin:
-        name: sops-v1.0
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: monitoring
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: grafana
+#   namespace: argocd
+#   labels:
+#     app.kubernetes.io/name: grafana
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   project: default
+#   sources:
+#     - repoURL: https://grafana-community.github.io/helm-charts
+#       chart: grafana
+#       targetRevision: 12.4.2
+#       helm:
+#         valueFiles:
+#           - $values/infrastructure/grafana/values.yaml
+#     - repoURL: git@github.com:khanhcmlab/gitops.git
+#       targetRevision: HEAD
+#       ref: values
+#     - repoURL: git@github.com:khanhcmlab/gitops.git
+#       targetRevision: HEAD
+#       path: infrastructure/grafana
+#       plugin:
+#         name: sops-v1.0
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: monitoring
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#       - CreateNamespace=true
+#       - ServerSideApply=true
