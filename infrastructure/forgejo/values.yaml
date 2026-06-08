@@ -18,7 +18,8 @@ resources:
 persistence:
   enabled: true
   size: 20Gi
-  storageClassName: local-path
+  storageClassName: nfs-rwx
+
 
 
 db:

@@ -1,30 +1,30 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: local-path-provisioner
+  name: nfs-provisioner
   namespace: argocd
   labels:
-    app.kubernetes.io/name: local-path-provisioner
+    app.kubernetes.io/name: nfs-provisioner
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/rancher/local-path-provisioner.git
-      targetRevision: v0.0.36
-      path: deploy/chart/local-path-provisioner
+    - repoURL: https://kubernetes-sigs.github.io/nfs-ganesha-server-and-external-provisioner/
+      chart: nfs-server-provisioner
+      targetRevision: 1.8.0
       helm:
         valueFiles:
-          - $values/infrastructure/local-path-provisioner/values.yaml
+          - $values/infrastructure/nfs-provisioner/values.yaml
     - repoURL: git@github.com:khanhcmlab/gitops.git
       targetRevision: HEAD
       ref: values
     - repoURL: git@github.com:khanhcmlab/gitops.git
       targetRevision: HEAD
-      path: infrastructure/local-path-provisioner
+      path: infrastructure/nfs-provisioner
   destination:
     server: https://kubernetes.default.svc
-    namespace: local-path-storage
+    namespace: nfs-provisioner
   syncPolicy:
     automated:
       prune: true
@@ -32,3 +32,4 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
+

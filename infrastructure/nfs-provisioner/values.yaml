@@ -1,0 +1,15 @@
+persistence:
+  enabled: true
+  existingClaim: nfs-server-provisioner-pvc
+
+nodeSelector:
+  node: gl
+
+storageClass:
+  create: true
+  name: nfs-rwx
+
+  defaultClass: false
+
+extraArgs:
+  device-based-fsids: "false"
