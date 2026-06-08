@@ -1,3 +1,7 @@
 defaultSettings:
   defaultDataPath: /var/mnt/zfs-data/longhorn
   defaultReplicaCount: 2
+
+helmPreUpgradeCheckerJob:
+  enabled: false
+
