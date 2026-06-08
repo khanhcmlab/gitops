@@ -18,7 +18,8 @@ resources:
 persistence:
   enabled: true
   size: 20Gi
-  storageClassName: local-storage
+  storageClassName: local-path
+
 
 db:
   type: postgres

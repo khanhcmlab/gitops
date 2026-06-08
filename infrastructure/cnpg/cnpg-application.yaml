@@ -19,9 +19,7 @@ spec:
     - repoURL: git@github.com:khanhcmlab/gitops.git
       targetRevision: HEAD
       ref: values
-    - repoURL: git@github.com:khanhcmlab/gitops.git
-      targetRevision: HEAD
-      path: infrastructure/cnpg
+
   destination:
     server: https://kubernetes.default.svc
     namespace: cnpg-system
