@@ -18,7 +18,8 @@ spec:
           - $values/infrastructure/forgejo/values.yaml
         values: |
           nodeSelector:
-            node: gl
+            node: hp
+
     - repoURL: git@github.com:khanhcmlab/gitops.git
       targetRevision: HEAD
       ref: values

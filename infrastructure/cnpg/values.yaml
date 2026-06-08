@@ -1,5 +1,6 @@
 nodeSelector:
-  node: gl
+  node: hp
+
 
 resources:
   requests:
