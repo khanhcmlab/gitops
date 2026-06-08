@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: local-path-provisioner
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: local-path-provisioner
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/rancher/local-path-provisioner.git
+      targetRevision: v0.0.36
+      path: deploy/chart/local-path-provisioner
+      helm:
+        valueFiles:
+          - $values/infrastructure/local-path-provisioner/values.yaml
+    - repoURL: git@github.com:khanhcmlab/gitops.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: git@github.com:khanhcmlab/gitops.git
+      targetRevision: HEAD
+      path: infrastructure/local-path-provisioner
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: local-path-storage
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
