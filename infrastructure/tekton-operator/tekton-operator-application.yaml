@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tekton-operator
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: tekton-operator
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/tektoncd/operator.git
+      targetRevision: v0.79.1
+      path: charts/tekton-operator
+      helm:
+        valueFiles:
+          - $values/infrastructure/tekton-operator/values.yaml
+    - repoURL: git@github.com:khanhcmlab/gitops.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: git@github.com:khanhcmlab/gitops.git
+      targetRevision: HEAD
+      path: infrastructure/tekton-operator
+      plugin:
+        name: sops-v1.0
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tekton-operator
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

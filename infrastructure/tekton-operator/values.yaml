@@ -1,0 +1,17 @@
+# Default values for tekton-operator
+# See: https://github.com/tektoncd/operator/blob/main/charts/tekton-operator/values.yaml
+
+# Enable automatic CRD installation and upgrades (required for ArgoCD to sync properly)
+installCRDs: true
+
+openshift:
+  enabled: false
+
+operator:
+  # Automatically install default TektonConfig (dealt with via kustomization instead for explicit control)
+  autoInstallComponents: false
+  
+# Reference to image pull secrets if pulling operator images from a private registry.
+# This secret must exist in the 'tekton-operator' namespace.
+imagePullSecrets:
+  - name: "registry-credentials"
