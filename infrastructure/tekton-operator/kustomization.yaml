@@ -5,3 +5,5 @@ resources:
   - namespaces.yaml
   - tektonconfig.yaml
   - secret.enc.yaml
+  - tekton-operator-externalname-service.yaml
+
